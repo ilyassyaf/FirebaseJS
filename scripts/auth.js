@@ -1,5 +1,14 @@
-// add admin cloud functions
+// Form elem
 const adminForm = document.querySelector('.admin-actions');
+const createForm = document.querySelector('#create-form');
+const signupForm = document.querySelector('#signup-form');
+const loginForm = document.querySelector('#login-form');
+
+// elem
+const logout = document.querySelectorAll('#logout');
+const sidenavElem = document.querySelector('.sidenav');
+
+// add admin cloud functions
 adminForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const adminEmail = document.querySelector('#admin-email').value;
@@ -29,7 +38,6 @@ auth.onAuthStateChanged(user => {
 });
 
 // create new guide
-const createForm = document.querySelector('#create-form');
 createForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -40,13 +48,12 @@ createForm.addEventListener('submit', (e) => {
         // close modal & reset form
         const modal = document.querySelector('#modal-create');
         M.Modal.getInstance(modal).close();
+        M.Sidenav.getInstance(sidenavElem).close();
         createForm.reset();
     });
 })
 
 // signup
-const signupForm = document.querySelector('#signup-form');
-
 signupForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -62,6 +69,7 @@ signupForm.addEventListener('submit', (e) => {
     }).then(() => {
         const modal = document.querySelector('#modal-signup');
         M.Modal.getInstance(modal).close();
+        M.Sidenav.getInstance(sidenavElem).close();
         signupForm.reset();
         signupForm.querySelector('.error').innerHTML = '';
     }).catch(err => {
@@ -70,16 +78,15 @@ signupForm.addEventListener('submit', (e) => {
 });
 
 // logout
-const logout = document.querySelectorAll('#logout');
 logout.forEach(logout => {
     logout.addEventListener('click', (e) => {
         e.preventDefault();
+        M.Sidenav.getInstance(sidenavElem).close();
         auth.signOut();
     })
 });
 
 // login
-const loginForm = document.querySelector('#login-form');
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -91,6 +98,7 @@ loginForm.addEventListener('submit', (e) => {
         // close login modal
         const modal = document.querySelector('#modal-login');
         M.Modal.getInstance(modal).close();
+        M.Sidenav.getInstance(sidenavElem).close();
         loginForm.reset();
         loginForm.querySelector('.error').innerHTML = '';
     }).catch(err => {
