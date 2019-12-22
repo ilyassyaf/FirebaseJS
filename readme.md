@@ -1,4 +1,4 @@
-demo = ilyassyaf.github.io/FirebaseJS
+demo = https://ilyassyaf.github.io/FirebaseJS/
 
 admin = {
   email: 'admin@admin.com',
